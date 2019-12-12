@@ -26,7 +26,7 @@ function aatach(){
 
 
 #Bind para baixar audio do youtube
-alias youtube-audio-dl='youtube-dl -x --audio-format best'
+alias youtube-audio-dl='youtube-dl -x --audio-format mp3'
 alias idea="intellij-idea-ultimate"
 alias k="kubectl"
 complete -F __start_kubectl k
