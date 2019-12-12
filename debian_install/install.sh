@@ -35,7 +35,8 @@ apt-get install -y curl \
     chromium \
     i3 \
     ffmpeg \
-    vlc 
+    vlc \
+    xclip
     
 # Iniciando snap
 systemctl start snapd.service
