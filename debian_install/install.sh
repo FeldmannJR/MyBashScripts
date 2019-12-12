@@ -36,7 +36,9 @@ apt-get install -y curl \
     i3 \
     ffmpeg \
     vlc \
-    xclip
+    xclip \
+    rar \
+    unrar
     
 # Iniciando snap
 systemctl start snapd.service
