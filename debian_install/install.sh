@@ -4,8 +4,8 @@
 # You have to install the nvidia driver manually
 set -e
 set -x
-TEMP_DIR=./temp
-SCRIPT_DIR="$( cd "$(dirname "$0")" ; pwd -P )"
+export TEMP_DIR=./temp
+export SCRIPT_DIR="$( cd "$(dirname "$0")" ; pwd -P )"
 rm -rf $TEMP_DIR
 mkdir $TEMP_DIR
 cd $TEMP_DIR
@@ -108,3 +108,4 @@ chmod a+rx /usr/local/bin/youtube-dl
 # Segunda parte da instalação
 source $SCRIPT_DIR/personal.sh
 source $SCRIPT_DIR/apps.sh
+source $SCRIPT_DIR/debs.sh
