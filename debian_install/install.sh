@@ -91,6 +91,7 @@ apt-get update && apt-get install -y \
     adoptopenjdk-8-hotspot \
     libvulkan1:i386 \
     vulkan-utils \
+    winetricks \
     winehq-stable \
     lutris
 
