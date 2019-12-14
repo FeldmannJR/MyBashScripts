@@ -13,9 +13,8 @@ cd $TEMP_DIR
 sudo sed -i -r 's/buster main ?$/buster main contrib non-free/' /etc/apt/sources.list
 sudo sed -i -r 's/buster-updates main ?$/buster-updates main contrib non-free/' /etc/apt/sources.list
 sudo sed -i -r 's/buster\/updates main ?$/buster\/updates main contrib non-free/' /etc/apt/sources.list
-# Removing old packages
-apt-get remove docker docker-engine docker.io containerd runc
-
+USER=feldmann
+apt-get update && apt-get upgrade
 apt-get install -y curl \
     wget \
     vim \
@@ -65,6 +64,14 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.lis
 wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | apt-key add -
 add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
 
+# Open Suse Strycore
+# Lutris
+echo 'deb http://download.opensuse.org/repositories/home:/strycore/Debian_10/ /' > /etc/apt/sources.list.d/home:strycore.list
+wget -qO - https://download.opensuse.org/repositories/home:strycore/Debian_10/Release.key | apt-key add - 
+
+# Removing old packages
+apt-get remove docker docker-engine docker.io containerd runc
+
 apt-get update && apt-get install -y \
     spotify-client \
     docker-ce \
@@ -73,7 +80,8 @@ apt-get update && apt-get install -y \
     nodejs \
     yarn \
     codium \
-    adoptopenjdk-8-hotspot
+    adoptopenjdk-8-hotspot \
+    lutris
 # Add my user to applications groups
 usermod -aG docker $USER
 usermod -aG libvirt $USER
@@ -104,7 +112,8 @@ curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/miniku
 rm -rf usr/local/bin/youtube-dl
 curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
 chmod a+rx /usr/local/bin/youtube-dl
-
+# Helm
+curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 # Segunda parte da instalação
 source $SCRIPT_DIR/personal.sh
 source $SCRIPT_DIR/apps.sh
