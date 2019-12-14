@@ -14,6 +14,8 @@ sudo sed -i -r 's/buster main ?$/buster main contrib non-free/' /etc/apt/sources
 sudo sed -i -r 's/buster-updates main ?$/buster-updates main contrib non-free/' /etc/apt/sources.list
 sudo sed -i -r 's/buster\/updates main ?$/buster\/updates main contrib non-free/' /etc/apt/sources.list
 USER=feldmann
+# Adding support for 32 bits packages
+dpkg --add-architecture i386
 apt-get update && apt-get upgrade
 apt-get install -y curl \
     wget \
@@ -43,6 +45,7 @@ apt-get install -y curl \
 systemctl start snapd.service
 
 # Repositories
+# =================================================================================================
 # Spotify
 curl -sS https://download.spotify.com/debian/pubkey.gpg | apt-key add - 
 echo "deb http://repository.spotify.com stable non-free" | tee /etc/apt/sources.list.d/spotify.list
@@ -69,6 +72,11 @@ add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
 echo 'deb http://download.opensuse.org/repositories/home:/strycore/Debian_10/ /' > /etc/apt/sources.list.d/home:strycore.list
 wget -qO - https://download.opensuse.org/repositories/home:strycore/Debian_10/Release.key | apt-key add - 
 
+# WineHQ
+echo 'deb https://dl.winehq.org/wine-builds/debian/ buster main' > /etc/apt/sources.list.d/winehq.list
+wget -qO - https://dl.winehq.org/wine-builds/winehq.key | apt-key add -
+# =================================================================================================
+
 # Removing old packages
 apt-get remove docker docker-engine docker.io containerd runc
 
@@ -81,7 +89,11 @@ apt-get update && apt-get install -y \
     yarn \
     codium \
     adoptopenjdk-8-hotspot \
+    libvulkan1:i386 \
+    vulkan-utils \
+    winehq-stable \
     lutris
+
 # Add my user to applications groups
 usermod -aG docker $USER
 usermod -aG libvirt $USER
