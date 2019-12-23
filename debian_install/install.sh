@@ -16,7 +16,7 @@ sudo sed -i -r 's/buster\/updates main ?$/buster\/updates main contrib non-free/
 USER=feldmann
 # Adding support for 32 bits packages
 dpkg --add-architecture i386
-apt-get update && apt-get upgrade
+apt-get update && apt-get upgrade -y
 apt-get install -y curl \
     wget \
     vim \
@@ -44,42 +44,12 @@ apt-get install -y curl \
 # Iniciando snap
 systemctl start snapd.service
 
-# Repositories
-# =================================================================================================
-# Spotify
-curl -sS https://download.spotify.com/debian/pubkey.gpg | apt-key add - 
-echo "deb http://repository.spotify.com stable non-free" | tee /etc/apt/sources.list.d/spotify.list
-# Docker
-curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
-add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/debian \
-   $(lsb_release -cs) \
-   stable"
-# VsCodium
-wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg | apt-key add -
-apt-add-repository 'deb https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/debs/ vscodium main'
-# Nodejs
-curl -sL https://deb.nodesource.com/setup_13.x | bash -
-# Yarn
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-# AdoptOpenJDK
-wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | apt-key add -
-add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
-
-# Open Suse Strycore
-# Lutris
-echo 'deb http://download.opensuse.org/repositories/home:/strycore/Debian_10/ /' > /etc/apt/sources.list.d/home:strycore.list
-wget -qO - https://download.opensuse.org/repositories/home:strycore/Debian_10/Release.key | apt-key add - 
-
-# WineHQ
-echo 'deb https://dl.winehq.org/wine-builds/debian/ buster main' > /etc/apt/sources.list.d/winehq.list
-wget -qO - https://dl.winehq.org/wine-builds/winehq.key | apt-key add -
-# =================================================================================================
-
 # Removing old packages
 apt-get remove docker docker-engine docker.io containerd runc
 
+# Additional Repositories
+source $SCRIPT_DIR/repositories.sh
+# Install Additional Packages
 apt-get update && apt-get install -y \
     spotify-client \
     docker-ce \
@@ -93,7 +63,8 @@ apt-get update && apt-get install -y \
     vulkan-utils \
     winetricks \
     winehq-stable \
-    lutris
+    lutris \
+    virtualbox-6.1 
 
 # Add my user to applications groups
 usermod -aG docker $USER
@@ -127,6 +98,7 @@ curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-
 chmod a+rx /usr/local/bin/youtube-dl
 # Helm
 curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+
 # Segunda parte da instalação
 source $SCRIPT_DIR/personal.sh
 source $SCRIPT_DIR/apps.sh
