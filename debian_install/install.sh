@@ -40,7 +40,8 @@ apt-get install -y curl \
     xclip \
     rar \
     unrar \
-    kodi
+    kodi \
+    pavucontrol
     
 # Iniciando snap
 systemctl start snapd.service
