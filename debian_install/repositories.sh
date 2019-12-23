@@ -5,6 +5,7 @@
 DISTRO="$(lsb_release -s -c)"
 curl -sS https://download.spotify.com/debian/pubkey.gpg | apt-key add - 
 echo "deb http://repository.spotify.com stable non-free" | tee /etc/apt/sources.list.d/spotify.list
+
 # Docker
 curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
 echo "deb [arch=amd64] https://download.docker.com/linux/debian $DISTRO stable" | tee /etc/apt/sources.list.d/docker.list

@@ -39,7 +39,8 @@ apt-get install -y curl \
     vlc \
     xclip \
     rar \
-    unrar
+    unrar \
+    kodi
     
 # Iniciando snap
 systemctl start snapd.service
