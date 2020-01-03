@@ -43,7 +43,8 @@ apt-get install -y curl \
     unrar \
     kodi \
     pavucontrol \
-    dnsutils 
+    dnsutils \
+    pwgen
     
 # Iniciando snap
 systemctl start snapd.service
