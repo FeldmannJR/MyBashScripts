@@ -44,7 +44,8 @@ apt-get install -y curl \
     kodi \
     pavucontrol \
     dnsutils \
-    pwgen
+    pwgen \
+    libnotify-bin
     
 # Iniciando snap
 systemctl start snapd.service
