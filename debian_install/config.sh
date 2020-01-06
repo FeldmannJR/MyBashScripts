@@ -4,6 +4,8 @@ HOME=/home/feldmann/
 git config --global user.name "Carlos Feldmann"
 git config --global user.email "feldmannjunior@gmail.com"
 
+echo 'source /etc/profile.d/undistract-me.sh' >> $HOME/.bashrc
+
 # Copiando meus aliases
 if [ -f $HOME/.bash_aliases ]; then
     mv $HOME/.bash_aliases $HOME/.bash_aliases_old

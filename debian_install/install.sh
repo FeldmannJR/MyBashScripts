@@ -45,7 +45,8 @@ apt-get install -y curl \
     pavucontrol \
     dnsutils \
     pwgen \
-    libnotify-bin
+    libnotify-bin \
+    undistract-me
     
 # Iniciando snap
 systemctl start snapd.service
@@ -76,6 +77,8 @@ apt-get update && apt-get install -y \
 usermod -aG docker $USER
 usermod -aG libvirt $USER
 
+# User Commands
+sudo -u $USER bash -c $SCRIPT_DIR/user.sh
 # Snap Packages
 # ======================
 # Instalando PhpStorm
