@@ -24,6 +24,12 @@ function aatach(){
     done    
 }
 
+# Reboot into windows without the need to select in grub gui
+function xexelento {
+    WINDOWS_TITLE=`grep -i "^menuentry 'Windows" /boot/grub/grub.cfg|head -n 1|cut -d"'" -f2`
+    sudo grub-reboot "$WINDOWS_TITLE"
+    sudo reboot
+}
 
 #Bind para baixar audio do youtube
 alias youtube-audio-dl='youtube-dl -x --audio-format mp3'
