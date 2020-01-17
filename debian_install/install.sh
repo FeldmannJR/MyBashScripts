@@ -8,7 +8,6 @@ export TEMP_DIR=./temp
 export SCRIPT_DIR="$( cd "$(dirname "$0")" ; pwd -P )"
 rm -rf $TEMP_DIR
 mkdir $TEMP_DIR
-cd $TEMP_DIR
 # Enabling Non-free contrib packages
 sudo sed -i -r 's/buster main ?$/buster main contrib non-free/' /etc/apt/sources.list
 sudo sed -i -r 's/buster-updates main ?$/buster-updates main contrib non-free/' /etc/apt/sources.list
@@ -46,7 +45,8 @@ apt-get install -y curl \
     dnsutils \
     pwgen \
     libnotify-bin \
-    undistract-me
+    undistract-me \
+    ktorrent
     
 # Iniciando snap
 systemctl start snapd.service
@@ -92,7 +92,7 @@ snap install postman
 # Arquivos Binarios
 source $SCRIPT_DIR/binaries.sh
 # Apps
-source $SCRIPT_DIR/apps.sh
+sudo -u $USER bash -c $SCRIPT_DIR/apps.sh
 # Pacotes Debian
 source $SCRIPT_DIR/debs.sh
 # Configurações

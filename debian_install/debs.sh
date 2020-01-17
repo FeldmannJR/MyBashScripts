@@ -1,7 +1,7 @@
 #!/bin/bash
 set -x
-export SCRIPT_DIR="$( cd "$(dirname "$0")" ; pwd -P )"
-export TEMP_DIR=$SCRIPT_DIR/temp  
+SCRIPT_DIR="$( cd "$(dirname "$0")" ; pwd -P )"
+TEMP_DIR=$SCRIPT_DIR/tmp  
 DEBS=$TEMP_DIR/debs
 # Delete old versions
 rm -rf $DEBS
@@ -20,8 +20,5 @@ wget https://files.multimc.org/downloads/multimc_1.3-1.deb
 #=================================================
 
 # Installing
-dpkg -i *.deb
-# Cleaning Installation Files
-cd $TEMP_DIR
-# Fix dependencies
-apt-get --fix-broken install -y
+apt-get install -y ./*.deb
+cd $SCRIPT_DIR
