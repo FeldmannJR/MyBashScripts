@@ -36,7 +36,11 @@ alias youtube-audio-dl='youtube-dl -x --audio-format mp3'
 alias idea="intellij-idea-ultimate"
 alias k="kubectl"
 complete -F __start_kubectl k
+
 alias d="docker"
+_completion_loader docker
+complete -F _docker d
+
 alias dc="docker-compose"
 alias m="mvn"
 alias mci="mvn clean install"
