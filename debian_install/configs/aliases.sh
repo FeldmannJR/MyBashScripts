@@ -24,7 +24,7 @@ function aatach(){
     done    
 }
 
-# Reboot into windows without the need to select in grub gui
+# Reboot into windows without the need to select in the grub gui
 function xexelento {
     WINDOWS_TITLE=`grep -i "^menuentry 'Windows" /boot/grub/grub.cfg|head -n 1|cut -d"'" -f2`
     sudo grub-reboot "$WINDOWS_TITLE"
