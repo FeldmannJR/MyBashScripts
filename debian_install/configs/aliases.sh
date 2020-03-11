@@ -10,10 +10,15 @@ function dartisan(){
 function dcomposer(){
     dcmd composer $@
 }
+function dbconnect(){
+        CONTAINER=$1
+        shift
+        docker exec -it $CONTAINER /bin/bash -c "exec mysql -u root -p\"\${MARIADB_ROOT_PASSWORD}\" $@"
 
+}
 function aatach(){
     while true; do
-        docker attach $1 
+        docker attach $1
         echo "Pressione qualquer tecla para parar a execução..."
         read -s -r -n 1 -t 3
         if [ $? = 0 ]; then
@@ -21,7 +26,7 @@ function aatach(){
             break
         fi
         docker restart $1
-    done    
+    done
 }
 
 # Reboot into windows without the need to select in the grub gui
@@ -45,4 +50,8 @@ alias dc="docker-compose"
 alias m="mvn"
 alias mci="mvn clean install"
 alias mcp="mvn clean package"
-alias code="codium"
+
+# Create alias only if codium is installed
+if [ -x "$(command -v codium)" ]; then
+    alias code="codium"
+fi
